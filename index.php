@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="masterEstilos.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<<?php
+include ("conexion.php");
+?>
+
 <script type="text/javascript">
             function desplegar(){
                 document.getElementById("InicioSesion").style.display="block";

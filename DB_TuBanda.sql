@@ -41,3 +41,6 @@ CREATE TABLE Genero(
     CONSTRAINT ck_genero UNIQUE (gNombre),
     CONSTRAINT fk_perfil_genero FOREIGN KEY (pID) REFERENCES Perfil (uID)
 );
+
+INSERT INTO Usuario (uCorreo,uUsuario,uNombre,uContrasena,uFechaNacimiento,uLugarOrigen)
+         VALUES ('dariop_14@hotmail.com','dariop14','Dario Pazmiño','dreamtheater','1997-10-19','Ecuador');

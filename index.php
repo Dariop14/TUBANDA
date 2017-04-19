@@ -6,10 +6,6 @@
 <link rel="stylesheet" href="masterEstilos.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<<?php
-include ("conexion.php");
-?>
-
 <script type="text/javascript">
             function desplegar(){
                 document.getElementById("InicioSesion").style.display="block";
@@ -32,21 +28,36 @@ include ("conexion.php");
 <body>
 
 
+  <?php
+      session_start();
+      include('conexion.php');
+      if(empty($_SESSION['usuario'])) { // comprobamos que las variables de sesión estén vacías
+  ?>
+
+
     <div class="bgVentana" id="InicioSesion">
         <div class="ventana">
-            <form>
+            <form action="validar.php" method="post">
                 <a href="javascript:cerrar();">x</a>
                 <p>Usuario:</p><input type="text" class="Search" name="usuario" placeholder="Usuario" style="width:60%; height: 40px;">
                 <p>Contraseña:</p><input type="password" class="Search" name="contraseña" placeholder="Contraseña"
                                          style="width:60%; height: 40px; border: 1px solid #ccc; border-radius: 2px; padding-left: 8%;"><br>
-                <button type="submit" class="Submit" name="Iniciar sesión" value="Iniciar Sesión" style="margin-top: 15px; width: auto; margin-bottom: 5px;">Iniciar sesión</button>
+                <button type="submit" class="Submit" name="login" value="login" style="margin-top: 15px; width: auto; margin-bottom: 5px;">Iniciar sesión</button>
             </form>
         </div>
     </div>
 
+    <?php
+    }else {
+    ?>
+            <p>Hola <strong><?=$_SESSION['usuario']?></strong> | <a href="logout.php">Salir</a></p>
+    <?php
+        }
+    ?>
+
     <div class="bgVentana" id="registro">
         <div class="ventana">
-               <form>
+               <form method="post">
                   <a href="javascript:cerrarRegistro();">x</a>
                   <p>Usuario:</p><input type="text" class="Search" name="usuario" placeholder="Usuario" style="width:60%; margin-top:0px;height: 40px;">
                   <p>Correo electrónico</p><input type="email" class="Search" name="correo" placeholder="Correo Electrónico" style="width:60%;height: 40px;border: 1px solid #ccc; border-radius: 2px; padding-left: 8%;">

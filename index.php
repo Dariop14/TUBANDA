@@ -22,52 +22,141 @@
             function cerrarRegistro(){
                 document.getElementById("registro").style.display="none";
             }
-        </script>
+</script>
+<script>
+function MenuResponsive()
+{
+  var x = document.getElementById("BarraResponsive");
+   if (x.className === "menu") {
+       x.className += " responsive";
+   } else {
+       x.className = "menu";
+   }
+ }
+</script>
+
 
 </head>
-<body>
+<body onload="desplegar();">
 
 
   <?php
-      session_start();
-      include('conexion.php');
-      if(empty($_SESSION['usuario'])) { // comprobamos que las variables de sesión estén vacías
-  ?>
+     include('conexion.php'); //incluimos el archivo de conexiona la BD
+     if(isset($_POST['enviar'])){
+       function valida_email($email){
+         if (preg_match('/^[A-Za-z0-9-_.+%]+@[A-Za-z0-9-.]+\.[A-Za-z]{2,4}$/', $correo))
+         {return true;}
+         else{
+           return false;
+             }
+         }
+        }
+
+        // Procedemos a comprobar que los campos del formulario no estén vacíos
+          $sin_espacios = count_chars($_POST['uNombre'], 1);
+          if(!empty($sin_espacios[32])) { // comprobamos que el campo uNombre no tenga espacios en blanco
+              echo "El campo <em>uNombre</em> no debe contener espacios en blanco. <a href='javascript:history.back();'>Reintentar</a>";
+          }elseif(empty($_POST['uNombre'])) { // comprobamos que el campo uNombre no esté vacío
+              echo "No haz ingresado tu usuario. <a href='javascript:history.desplegar();'>Reintentar</a>";
+          }elseif(empty($_POST['uContrasena'])) { // comprobamos que el campo uContrasena no esté vacío
+              echo "No haz ingresado contraseña. <a href='javascript:history.desplegar();'>Reintentar</a>";
+          }elseif($_POST['uContrasena'] != $_POST['usuario_Constrasena_conf']) { // comprobamos que las contraseñas ingresadas coincidan
+              echo "Las contraseñas ingresadas no coinciden. <a href='javascript:history.desplegar();'>Reintentar</a>";
+          }elseif(!valida_email($_POST['uCorreo'])) { // validamos que el email ingresado sea correcto
+              echo "El email ingresado no es válido. <a href='javascript:history.desplegar();'>Reintentar</a>";
+          }
+
+          else {
+               // "limpiamos" los campos del formulario de posibles códigos maliciosos
+               $usuario_nombre = mysql_real_escape_string($_POST['uNombre']);
+               $usuario_clave = mysql_real_escape_string($_POST['uContrasena']);
+               $usuario_email = mysql_real_escape_string($_POST['uCorreo']);
+               // comprobamos que el usuario ingresado no haya sido registrado antes
+               $sql = mysql_query("SELECT uNombre FROM usuarios WHERE uNombre='".$usuario_nombre."'");
+               if(mysql_num_rows($sql) > 0) {
+                   echo "El nombre usuario elegido ya ha sido registrado anteriormente. <a href='javascript:history.desplegar();'>Reintentar</a>";
+               }else {
+                   $usuario_clave = md5($usuario_clave); // encriptamos la contraseña ingresada con md5
+                   // ingresamos los datos a la BD
+                   $reg = mysql_query("INSERT INTO usuarios (uNombre, uContrasena, uCorreo) VALUES ('".$usuario_nombre."', '".$usuario_clave."', '".$usuario_email."')");
+                   if($reg) {
+                       echo "Datos ingresados correctamente.";
+                   }else {
+                       echo "ha ocurrido un error y no se registraron los datos.";
+                   }
+                 }
+
+?>
+      <div class="bgVentana" id="registro">
+          <div class="ventana">
+                 <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+                    <label>Registro</label>
+                    <a href="javascript:cerrarRegistro();">x</a>
+                    <p>Usuario:</p><input type="text" class="Search" name="uNombre" placeholder="Usuario" style="width:60%; margin-top:0px;height: 40px;">
+                    <p>Correo electrónico</p><input type="email" class="Search" name="uCorreo" placeholder="Correo Electrónico" style="width:60%;height: 40px;border: 1px solid #ccc; border-radius: 2px; padding-left: 8%;">
+                    <p>Contraseña:</p><input type="password" class="Search" name="uContrasena" placeholder="Contraseña" style="width:60%;height: 40px;border: 1px solid #ccc; border-radius: 2px; padding-left: 8%;"><br>
+                    <p>Confirmacion Contrasena:</p><input type="password" class="Search" name="usuario_Constrasena_conf" maxlength="15" />
+                    <button type="submit" class="Submit" name="Registrarse" value="Registrarse" style="margin-top: 15px; width: auto; margin-bottom: 10px;">Registrarse</button>
+                 </form>
+          </div>
+      </div>
+<?php } ?>
 
 
+
+
+<?php
+   session_start();
+   include('conexion.php');
+   if(empty($_SESSION['uNombre'])) { // comprobamos que las variables de sesión estén vacías
+?>
     <div class="bgVentana" id="InicioSesion">
         <div class="ventana">
             <form action="validar.php" method="post">
-                <a href="javascript:cerrar();">x</a>
-                <p>Usuario:</p><input type="text" class="Search" name="usuario" placeholder="Usuario" style="width:60%; height: 40px;">
-                <p>Contraseña:</p><input type="password" class="Search" name="contraseña" placeholder="Contraseña"
+                <a href="javascript:cerrar();">Cerrar X</a>
+                <p>Usuario:</p><input type="text" class="Search" name="uNombre" placeholder="Usuario" style="width:60%; height: 40px;">
+                <p>Contraseña:</p><input type="password" class="Search" name="uContrasena" placeholder="Contraseña"
                                          style="width:60%; height: 40px; border: 1px solid #ccc; border-radius: 2px; padding-left: 8%;"><br>
                 <button type="submit" class="Submit" name="login" value="login" style="margin-top: 15px; width: auto; margin-bottom: 5px;">Iniciar sesión</button>
             </form>
         </div>
     </div>
-
     <?php
     }else {
-    ?>
-            <p>Hola <strong><?=$_SESSION['usuario']?></strong> | <a href="logout.php">Salir</a></p>
-    <?php
-        }
-    ?>
-
-    <div class="bgVentana" id="registro">
-        <div class="ventana">
-               <form method="post">
-                  <a href="javascript:cerrarRegistro();">x</a>
-                  <p>Usuario:</p><input type="text" class="Search" name="usuario" placeholder="Usuario" style="width:60%; margin-top:0px;height: 40px;">
-                  <p>Correo electrónico</p><input type="email" class="Search" name="correo" placeholder="Correo Electrónico" style="width:60%;height: 40px;border: 1px solid #ccc; border-radius: 2px; padding-left: 8%;">
-                  <p>Contraseña:</p><input type="password" class="Search" name="contraseña" placeholder="Contraseña" style="width:60%;height: 40px;border: 1px solid #ccc; border-radius: 2px; padding-left: 8%;"><br>
-                  <button type="submit" class="Submit" name="Registrarse" value="Registrarse" style="margin-top: 15px; width: auto; margin-bottom: 10px;">Registrarse</button>
-               </form>
-        </div>
-    </div>
+?>
+        <p>Hola Perros<strong><?=$_SESSION['uNombre']?></strong> | <a href="logout.php">Salir</a></p>
+<?php
+    }
+?>
 
 
+<!--Comprobar acceso-->
+  <?php
+      session_start();
+      include('conexion.php');
+      if(isset($_POST['enviar'])) { // comprobamos que se hayan enviado los datos del formulario
+       // comprobamos que los campos usuarios_nombre y usuario_clave no estén vacíos
+       if(empty($_POST['uNombre']) || empty($_POST['uContrasena'])) {
+           echo "El usuario o la contraseña no han sido ingresados. <a href='javascript:history.desplegar();'>Reintentar</a>";
+       }else {
+           // "limpiamos" los campos del formulario de posibles códigos maliciosos
+           $usuario_nombre = mysql_real_escape_string($_POST['uNombre']);
+           $usuario_clave = mysql_real_escape_string($_POST['uContrasena']);
+           $usuario_clave = md5($usuario_clave);
+           // comprobamos que los datos ingresados en el formulario coincidan con los de la BD
+           $sql = mysql_query("SELECT uID, uNombre, uContrasena FROM Usuario WHERE uNombre='".$usuario_nombre."' AND uContrasena='".$usuario_clave."'");
+           if($row = mysql_fetch_array($sql)) {
+               $_SESSION['uID'] = $row['uID']; // creamos la sesion "uID" y le asignamos como valor el campo uID
+               $_SESSION['uNombre'] = $row["uNombre"]; // creamos la sesion "uNombre" y le asignamos como valor el campo uNombre
+               header("Location: conexion.php");
+           }else {
+             echo "Error. <a href='javascript:desplegar();'>Reintentar</a>";
+                 }
+               }
+ }else {
+     header("Location: conexion.php");
+ }
+?>
 
 <header>
 
@@ -231,14 +320,3 @@
 
 
 </body>
-<script>
-function MenuResponsive()
-{
-  var x = document.getElementById("BarraResponsive");
-   if (x.className === "menu") {
-       x.className += " responsive";
-   } else {
-       x.className = "menu";
-   }
- }
-</script>

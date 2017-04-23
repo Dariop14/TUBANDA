@@ -1,0 +1,143 @@
+.tabletaImagen {
+    display: inline-block;
+    padding: 0 25px;
+    height: 40px;
+    font-size: 15px;
+    line-height: 40px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+}
+
+.tabletaImagen img {
+    float: left;
+    margin: 0 10px 0 -25px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.closebtn {
+    padding-left: 10px;
+    color: #888;
+    font-weight: bold;
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.closebtn:hover {
+    color: #000;
+}
+
+.contenedor-filtros{
+  display: inline-block;
+  background-color:red;
+  width: 50%;
+  margin: 0px;
+
+}
+
+
+
+.contenedor-items-filtros{
+background-color: red;
+color: white;
+font-size: 15px;
+border-radius: 5px;
+text-decoration: none;
+margin: 10px;
+padding: 5px;
+
+}
+
+
+/*artistas*/
+.contenedor-artistas{
+  background-color: black;
+  padding: 40px;
+  margin:0px;
+}
+.contenedor-artista-individual{
+  background-color: black;
+  font-size: 18px;
+  color: white;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.contenedor-imagen-artistas{
+  float: left;
+
+  color: white;
+  padding: 20px;
+}
+
+.clear{
+  clear: both;
+}
+
+.noColapsar{
+  overflow: auto;
+}
+
+.contenedor-artista-individual .reservarbtn{
+  float: right;
+  text-decoration: none;
+  font-family: Banda;
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  margin:10px;
+  margin-right: 40px;
+}
+
+/*paneles filtros*/
+.contenedor-filtros #flip-Genero{
+ background-color: red;
+ font-family: Banda;
+ font-size: 20px;
+ text-align: center;
+ color: white;
+ padding: 5px;
+ border-radius: 5px;
+}
+.contenedor-filtros #panel-Genero {
+    padding: 5px;
+    background-color:rgba(255, 0, 0, 0.5);
+
+}
+
+#panel-Genero {
+    padding: 50px;
+    display: none;
+}
+
+.contenedor-filtros  #flip-Instrumentos{
+  background-color: red;
+  font-family: Banda;
+  font-size: 20px;
+  text-align: center;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+ }
+.contenedor-filtros #panel-Instrumentos {
+  padding: 5px;
+  background-color:rgba(255, 0, 0, 0.5);
+
+}
+
+#panel-Instrumentos  {
+    padding: 50px;
+    display: none;
+}
+
+.contenedor-filtros-master
+{
+ display: flex;
+ width: 100%;
+ height: auto;
+ margin: 0px;
+
+}

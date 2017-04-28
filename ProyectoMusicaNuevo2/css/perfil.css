@@ -1,0 +1,70 @@
+.menu-navegacion{
+    background-color: white;
+    width: 25%;
+    height: auto;
+    color: black;
+    text-align: center;
+    border-radius: 3px;
+    float: left;
+    display: inline-block;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+}
+
+.menu-navegacion p{
+   color: black;
+}
+
+.boton{
+   width: 100%;
+   display: block;
+   border: 1px solid black;
+   text-align: center;
+   padding-top: 5%;
+   padding-bottom: 5%;
+}
+
+.boton:hover{
+    background-color: grey;
+    cursor: pointer;
+}
+
+.boton:focus{
+  background-color: grey;
+}
+
+.Contenido{
+  width: 65%;
+  height: auto;
+  background-color: white;
+  border-radius: 3px;
+  float: right;
+  display: inline-block;
+  margin-top: 2%;
+  margin-right: 2%;
+  margin-bottom: 2%;
+  padding: 2%;
+}
+
+.foto{
+  width: 180px;
+  height: 200px;
+  background-color: grey;
+  display: inline-block;
+}
+
+.Datos{
+  width: 75%;
+  height: auto;
+  background-color: grey;
+  display: inline-block;
+  float: right;
+  padding: 0;
+}
+
+.Datos p{
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-bottom: 7%;
+}

@@ -1,0 +1,14 @@
+
+/*artistas*/
+.contenedor-artistas{
+  background-color: black;
+  padding: 40px;
+  margin:0px;
+}
+.contenedor-artista-individual{
+  background-color: black;
+  font-size: 18px;
+  color: white;
+  border-radius: 5px;
+  padding: 20px;
+}

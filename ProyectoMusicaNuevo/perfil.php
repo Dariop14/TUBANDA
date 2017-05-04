@@ -32,43 +32,60 @@
                }
              }
 
-             function PublicarPerfil()
-             {
-               document.getElementById("infoPersonal").style.display="none";
-               document.getElementById("nuevoPerfil").style.display="block";
+             function DatosPersonales(){
+               document.getElementById("misPerfiles").style.display="none";
+               document.getElementById("infoPersonal").style.display="block";
              }
+
+             function Perfiles(){
+               document.getElementById("infoPersonal").style.display="none";
+               document.getElementById("misPerfiles").style.display="block";
+             }
+
+             function ActualizarInfo(){
+               document.getElementById("infoPublicada").style.display="none";
+               document.getElementById("editarInfo").style.display="block";
+             }
+
+             function CancelarActualizacion(){
+                document.getElementById("editarInfo").style.display="none";
+                document.getElementById("infoPublicada").style.display="block";
+             }
+
   </script>
 
 </head>
 <body>
-
+<!-- Se agrega el header -->
 <?php  include("Header.php");  ?>
-
 <?php  include("menu.php");  ?>
 
 <section>
 
       <div class="menu-navegacion">
+        <!-- Se agrega un mensaje de bienvenido con el nombre del usuario -->
           <p> Hola, <?php echo  $_SESSION['uUsuario'];  ?>  </p>
-          <button class="boton" id="datos"> Datos Personales </button>
-          <button class="boton" id="nuevo">
-             <a href="javascript:PublicarPerfil();"> Publicar un perfil </a> </button>
-          <button class="boton" id="misPerfiles"> Mis perfiles </button>
+          <!--  Menú de navegación dentro de la cuenta  -->
+          <a href="javascript:DatosPersonales();"><button class="boton" value="Datos Personales"> Datos Personales </button></a>
+          <a href="javascript:Perfiles();"><button class="boton" value="Mis Perfiles"> Mis perfiles </button></a>
           <button class="boton" id="contratos"> Mis contratos </button>
           <button class="boton" id="eventos"> Eventos </button>
       </div>
-
-        <div class="Contenido" id="nuevoPerfil" style="display:block">
-           <?php include("publicarPerfil.php"); ?>
-        </div>
-
+      <!-- Sección de información personal -->
         <div class="Contenido" id="infoPersonal" style="display:block">
            <?php include("PersonalInfo.php"); ?>
         </div>
+        <!-- Sección de perfiles agregados -->
+        <section id='misPerfiles' style='display:none;'>
+        <?php include("misPerfiles.php"); ?>
+        </section>
+
+
 
 </section>
 
 <footer>
+  <!-- Footer -->
       <?php  include("Footer.php");  ?>
 </footer>
 

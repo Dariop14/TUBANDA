@@ -2,7 +2,8 @@
     background-color: white;
     width: 25%;
     height: auto;
-    color: black;
+    color: #191716;
+    font-family: normal;
     text-align: center;
     border-radius: 3px;
     float: left;
@@ -12,26 +13,31 @@
     margin-left: 2%;
 }
 
-.menu-navegacion p{
-   color: black;
+.menu-navegacion a{
+   text-decoration: none;
 }
 
 .boton{
    width: 100%;
    display: block;
-   border: 1px solid black;
    text-align: center;
+   border: 1px solid rgba(100,100,100,0.1);
    padding-top: 5%;
    padding-bottom: 5%;
+   font-family: normal;
+   font-size: 18px;
+   background-color: #edf2f4;
 }
 
 .boton:hover{
-    background-color: grey;
+    background-color: #ff2533;
+    color: white;
     cursor: pointer;
 }
 
 .boton:focus{
-  background-color: grey;
+  background-color: #ff2533;
+  color: white;
 }
 
 .Contenido{
@@ -40,31 +46,39 @@
   background-color: white;
   border-radius: 3px;
   float: right;
-  display: inline-block;
   margin-top: 2%;
   margin-right: 2%;
   margin-bottom: 2%;
   padding: 2%;
+  font-family: normal;
 }
 
 .foto{
-  width: 180px;
-  height: 200px;
-  background-color: grey;
+  width: auto;
+  height: auto;
   display: inline-block;
+  text-align: center;
 }
 
 .Datos{
   width: 75%;
   height: auto;
-  background-color: grey;
   display: inline-block;
   float: right;
   padding: 0;
 }
 
 .Datos p{
-  margin-top: 5%;
+  margin-top: 2%;
   margin-left: 5%;
-  margin-bottom: 7%;
+  margin-bottom: 2%;
+}
+
+.Datos a{
+  color: #191716;
+  text-decoration: none;
+}
+
+.Datos a:hover{
+  color: #ff2533;
 }

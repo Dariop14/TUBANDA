@@ -8,23 +8,28 @@
 
 <script type="text/javascript">
             function desplegar(){
+               // Esta función permite desplegar el menu de inicio de sesión
                 document.getElementById("InicioSesion").style.display="block";
             }
 
             function cerrar(){
+              // Esta función permite cerrar el menu de inicio de sesión
                 document.getElementById("InicioSesion").style.display="none";
             }
 
             function desplegarRegistro(){
+              // Desplegar el menu de registro
                 document.getElementById("registro").style.display="block";
             }
 
             function cerrarRegistro(){
+              // Cerrar el menu de registro
                 document.getElementById("registro").style.display="none";
             }
 
             function MenuResponsive()
             {
+              // Función que permite realizar el modo responsive en el menu
               var x = document.getElementById("BarraResponsive");
                if (x.className === "menu") {
                    x.className += " responsive";
@@ -40,22 +45,20 @@
       <?php  include("Header.php");  ?>
 
       <h1>Proyecta tu musica</h1>
-      <p class="subTitle">Bandas | Musicos | Bares</p>
+      <p class="subTitle">Bandas&nbsp;|&nbsp; Musicos &nbsp;|&nbsp; Bares</p>
 
       <!-- Se incluye el menu desde otro archivo y será constante en todas las páginas -->
       <?php  include("menu.php");  ?>
 
             <!-- Video de fondo extraído de YouTube -->
             <div class="fullscreen-bg">
-                <iframe src="https://www.youtube.com/embed/TA4WfYHAmZk?autoplay=1;rel=0&amp;controls=0&amp;showinfo=0" width="100%" height="100%"></iframe>
+                <iframe src="https://www.youtube.com/embed/F5p0potaFXI?autoplay=1;rel=0&amp;controls=0&amp;showinfo=0" width="100%" height="100%"></iframe>
             </div>
 
             <!-- fondo-->
-            <section>
-            <div style="background-color:rgba(0,0,0,0.3); height: 100%; width:100%;">
+            <div style="background-color:rgba(0,0,0,0.3); height: 96%; width:100%;">
 
             </div>
-            </section>
 
             <section>
               <div class="NovedadesContainer">
@@ -104,8 +107,8 @@
                   <div class="nosotros-section">
                     <div class="contenedor-nosotros">
                     <!-- agregar tipografia atractiva igual para titulo y parrafo -->
-                   <p style="color:#ff2533; font-size:40px;  ">Nosotros</p>
-                       <p  style="font-size:20px;  ">
+                   <p style="color:#ff2533; font-size:40px;">Nosotros</p>
+                       <p  style="font-size:20px;">
                          Tu Banda es una iniciativa que comprende
                          distintos aspectos de la industria musical
                          ecuatoriana. Esta plataforma fue creada con el

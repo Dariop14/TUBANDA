@@ -2,7 +2,7 @@
 
 <head>
 <meta charset="utf-8" />
-<title>Servicios</title>
+<title>Perfil Completo</title>
 <link rel="stylesheet" href="css/masterEstilos.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -37,15 +37,9 @@
 </head>
 <body>
 
-<?php  include("Header.php");  ?>
-<?php  include("menu.php");  ?>
+<?php  include("Header.php");
+       include("menu.php");  ?>
 
-      <div class="contenedor-artistas noColapsar ">
-        <p class="contenedor-artista-individual noColapsar" style="text-align:center; font-size: 40px; padding-top:40px; padding-bottom:40px;">
-           PRÓXIMAMENTE
-        </p>
-
-      </div>
 
 
 <footer>

@@ -1,3 +1,4 @@
+<!-- Selector con opciones de países -->
 <select name="uLugarOrigen" style="width:60%; margin-top:0px;height: 40px;">
 <option value="AF">Afganistán</option>
 <option value="AL">Albania</option>

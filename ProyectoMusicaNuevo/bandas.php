@@ -2,7 +2,7 @@
 
 <head>
 <meta charset="utf-8" />
-<title>Bandas</title>
+<title>Músicos</title>
 <link rel="stylesheet" href="css/masterEstilos.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -32,6 +32,7 @@
                }
              }
 
+
             $(document).ready(function(){
             $("#flip-Genero").click(function(){
             $("#panel-Genero").slideToggle("slow");
@@ -50,9 +51,7 @@
 <body>
 
 <?php  include("Header.php");  ?>
-<?php include("menu.php");  ?>
-
-</header>
+<?php  include("menu.php");  ?>
 
 </nav>
 <section class="contenedor-filtros-master">
@@ -126,13 +125,14 @@
 </section>
 <br/>
 <section style="margin-left: 40px;">
-  <div class="tabletaImagen">
+<!-- conectar  con php segun los filtros que selecciones.. solo ejemplos-->
+  <div class="tabletaImagen" style="display:none;">
   <img src="imagenes/bateria.jpg" alt="Person" >
   Bateria
   <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
 </div>
 
-<div class="tabletaImagen">
+<div class="tabletaImagen" style="display:none;">
 <img src="imagenes/guitarraElectrica.png" alt="Person" >
 Guitarra Electrica
 <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
@@ -141,60 +141,37 @@ Guitarra Electrica
 </section>
 
 <section>
-  <div class="contenedor-artistas noColapsar ">
-    <p class="contenedor-artista-individual noColapsar">
-      <img class="contenedor-imagen-artistas" src="imagenes/santana.jpg" atl="artista Santana" width="220" height="220"/>
-       <br/>
-       <strong>SANTANA</strong> <br/>
-        guitarrista mexicano-estadounidense de rock,
-        ganador de varios premios Grammy.
-        Es considerado el 20º mejor guitarrista de todos los tiempos,
-        1 según la revista Rolling Stone.
-        Santana ha vendido más de 90 millones
-        de álbumes en todo el mundo contando las ventas
-        con su antigua banda y su carrera en solitario.
-     <br/>
-     <br/>
-     <a class="reservarbtn" href="#">Reservar</a>
-    </p>
 
+  <?php
 
-    <p class="contenedor-artista-individual noColapsar">
-      <img class="contenedor-imagen-artistas" src="imagenes/santana.jpg" atl="artista Santana" width="220" height="220"/>
-       <br/>
-       <strong>SANTANA</strong> <br/>
-        guitarrista mexicano-estadounidense de rock,
-        ganador de varios premios Grammy.
-        Es considerado el 20º mejor guitarrista de todos los tiempos,
-        1 según la revista Rolling Stone.
-        Santana ha vendido más de 90 millones
-        de álbumes en todo el mundo contando las ventas
-        con su antigua banda y su carrera en solitario.
-     <br/>
-     <br/>
-     <a class="reservarbtn" href="#">Reservar</a>
-    </p>
+      if($Resultado = mysql_query("SELECT * FROM Perfil WHERE pTipo = 'banda'")){
+          while($Fila = mysql_fetch_assoc($Resultado)){
+            $pfoto = $Fila["pImagen"];
+            $pnombre = $Fila["pNombre"];
+            $pgenero = $Fila["pGenero"];
+            $pdescripcion = $Fila["pDescripcion"];
 
-    <p class="contenedor-artista-individual noColapsar">
-      <img class="contenedor-imagen-artistas" src="imagenes/santana.jpg" atl="artista Santana" width="220" height="220"/>
-       <br/>
-       <strong>SANTANA</strong> <br/>
-        guitarrista mexicano-estadounidense de rock,
-        ganador de varios premios Grammy.
-        Es considerado el 20º mejor guitarrista de todos los tiempos,
-        1 según la revista Rolling Stone.
-        Santana ha vendido más de 90 millones
-        de álbumes en todo el mundo contando las ventas
-        con su antigua banda y su carrera en solitario.
-     <br/>
-     <br/>
-     <a class="reservarbtn" href="#">Reservar</a>
-    </p>
-  </div>
+            echo "<div class='contenedor-artistas noColapsar'>";
+            echo "<p class='contenedor-artista-individual noColapsar' style='padding-top=20px;'>";
+
+            $printResultados = "<img class='contenedor-imagen-artistas' src='$pfoto' width='220' height='220'><br>";
+            $printResultados.= "<a href='perfilCompleto.php' style='text-decoration:none; color:black;'><strong>$pnombre</strong></a>";
+            $printResultados.= "<br><br>$pgenero<br><br>";
+            $printResultados.= "$pdescripcion";
+            $printResultados.= "<br><br><a class='reservarbtn' href='#'>Reservar</a>";
+
+            echo "$printResultados";
+
+            echo "</p>";
+            echo "</div>";
+          }
+      }
+   ?>
+
 </section>
 
 <footer>
-        <?php  include("Footer.php");  ?>
+      <?php  include("Footer.php"); ?>
 </footer>
 
 </body>

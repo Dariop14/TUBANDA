@@ -11,13 +11,14 @@
 <div id="infoPublicada">
  <div class="foto">
   <?php
+
       // Extraemos de la BD la imagen del perfil registrada
       $fotoPerfil = mysql_query("SELECT uImagen FROM Usuario WHERE uID = '$id_usuario'");
       if($row = mysql_fetch_array($fotoPerfil)){
-        $imagen = $row[0];
+        $uImagen = $row[0];
       }
       // Agregamos la imagen
-      echo "<img src='$imagen' width='170' height='180'>";
+      echo "<img src='$uImagen' width='170' height='180'>";
    ?>
 </div>
 
@@ -64,31 +65,37 @@
 
      <br>
      <br>
-     <a href="javascript:location.reload()"><p>Recargar</p></a>
-     <a href="javascript:ActualizarInfo();"><p> Editar Información </p> </a>
+     <a href="javascript:location.reload()">
+     <p style="background-color:black; color:white; text-align:center; margin:10px; padding:10px;">Recargar</p></a>
+     <a href="javascript:ActualizarInfo();">
+     <p style="background-color:black; color:white; text-align:center; margin:10px; padding:10px;">Editar Información </p> </a>
   </div>
 </div>
 
 <!-- Sección que permite editar la información del usuario -->
 <div id="editarInfo" style="display:none;">
 
-    <div class="Foto">
-      <!-- Aquí estan los inputs de subida de imagen -->
-        <input type="file"><br><br>
-        <input type="submit" name="subirFoto" value="Establecer foto de perfil">
-    </div><br>
+
     <div class="Datos">
 
       <?php
           // Se comprueba que se envío el formulario
           if(isset($_POST['Actualizar'])){
+            $pNombre = mysql_real_escape_string($_POST['pNombre']);
+            $pPais = mysql_real_escape_string($_POST['pPais']);
+            $pContrasena = mysql_real_escape_string($_POST['pContrasena']);
+            $usuarioImagen = mysql_real_escape_string($_FILES['uImagen']['name']);
+            $uImagen_tmp = mysql_real_escape_string($_FILES['uImagen']['tmp_name']);
+
+
+        move_uploaded_file($uImagen_tmp,"imagenesUsuario/{$usuarioImagen}");
 
            include ("ActualizarPerfil.php");
 
          } else {
       ?>
 
-      <form method="POST">
+      <form method="POST" enctype="multipart/form-data">
         <p> Username: <?php echo  $_SESSION['uUsuario'];  ?></p>
         <p><label>Nombre y Apellido:</label>
               <input type="text" name="pNombre" value="<?php echo $nombre ?>" placeholder="Ingresa tu nombre y apellido"></p>
@@ -96,9 +103,12 @@
               <input type="text" name="pPais" value="<?php echo $pais ?>" placeholder="Ingresa tu País"></p>
         <p>Fecha de Nacimiento: <?php echo $fecha ?></p>
         <p><label>Contraseña</label>
-              <input type="text" name="pContrasena" value="<?php echo $contrasena ?>" placeholder="Ingresa tu nueva contraseña"></p>
+        <input type="text" name="pContrasena" value="<?php echo $contrasena ?>" placeholder="Ingresa tu nueva contraseña"></p>
+          <!-- Aquí estan los inputs de subida de imagen -->
+        <input type="file" name="uImagen"><br/><br>
         <input type="submit" class="Submit" style="width:auto; margin-left:100px;" name="Actualizar" value="Actualizar Datos">
-        <a href="javascript:CancelarActualizacion();"><input type="submit" class="Submit" name="cancelar" value="Cancelar"></a>
+        <a href="javascript:CancelarActualizacion();">
+        <input type="submit" class="Submit" name="cancelar" value="Cancelar"></a>
       </form>
 
       <?php } ?>

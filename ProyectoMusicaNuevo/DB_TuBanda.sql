@@ -7,7 +7,7 @@ CREATE TABLE Usuario(
     uUsuario VARCHAR(20) NOT NULL,
     uNombre VARCHAR(30) NOT NULL,
     uContrasena VARCHAR(255) NOT NULL,
-    uImagen VARCHAR(50),
+    uImagen text(100) NOT NULL,
     uFechaNacimiento DATE,
     uLugarOrigen VARCHAR(30),
     CONSTRAINT ck_usuario UNIQUE (uUsuario),
